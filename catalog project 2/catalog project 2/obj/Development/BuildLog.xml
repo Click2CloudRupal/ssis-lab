@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>catalog project 2</Name>
+    <LastWriteTime>2019-10-12T12:08:24.1892524Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+    <Salt>bCRdRHNq</Salt>
+    <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADAs5MCZv7kGcl4eW1kybegAAAAACAAAAAAAQZgAAAAEAACAAAABVXG/uFQJRFTLkMLclfCXWbau0syy6UiaaK4cTpNy5ngAAAAAOgAAAAAIAACAAAAC1zwHr0t86QEUCle6B/fHJ1rpoKcqLxuG0vUnLmTUmUTAAAAD9/AGbtFrfPna/f20IEZM07eNmURjTeQQP3oiVQfLMYgFvGbsYlWVPA2pR7TQyBa9AAAAAfJ2fuUj3HRmJbl8KFMV6YkQSXlXj11iDAZDURZQV6p+Kl2Ckua5D7il73xWGvwbIrGh0ToN0nDcmj/6x6Edxxg==</LastKnownProtectedHashedPassword>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>consplit.dtsx</Name>
+      <LastWriteTime>2019-10-12T12:08:18.2637283Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+      <Salt>xekUpiTK</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADAs5MCZv7kGcl4eW1kybegAAAAACAAAAAAAQZgAAAAEAACAAAACN2bbIiL2GV8xFkphDZP3WLedstT/LiT+I9nFz2YbldwAAAAAOgAAAAAIAACAAAAB3sZNm6PIWN1oVTRwrRPX/roXRYYehWqzwP8sWo9yH3zAAAAC0AqvKV/zeq/hxdvz905jzWG/nvwW+f0/dmihonA5VTaOLJp35T1NS6m4DBIp9CUZAAAAAeZvUIfRYvFg8THlZUOl/vISXG0gWmu2rjwssmb/pyz1WJ8g/6sKxuJpuJ8vRFejof5qDZE+555YfBqnc1O+QCQ==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

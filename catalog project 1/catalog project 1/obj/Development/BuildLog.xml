@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>catalog project 1</Name>
+    <LastWriteTime>2019-10-12T07:43:08.6579315Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+    <Salt>Zg79bQLI</Salt>
+    <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADAs5MCZv7kGcl4eW1kybegAAAAACAAAAAAAQZgAAAAEAACAAAADQK+2AXESiEE2dD1ONeZuTgtRmeHePuyttt+LTobHzXQAAAAAOgAAAAAIAACAAAABJo16FUzxIvuuViZOaYZoV1KiUuUl5Pdo2ckAPW0qg3jAAAADJ4pkLE0KtUHreAiGb6bt/PRHw5tZ7EMQVy56q3cTQf2D5lOqs16CC8P9eQeWntw5AAAAAb4+9fcvCCBySkHa0gqRUQc1ovC/ITBIbJrTK/hJYwppWYxVL527xJ/hdy1HdT72nZsG/Z3EK9+8vJDl8cVtNLw==</LastKnownProtectedHashedPassword>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>billingagg.dtsx</Name>
+      <LastWriteTime>2019-10-12T05:06:14.5990465Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithPassword</LastKnownProtectionLevel>
+      <Salt>feXsk/lt</Salt>
+      <LastKnownProtectedHashedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADAs5MCZv7kGcl4eW1kybegAAAAACAAAAAAAQZgAAAAEAACAAAACMh3vSIMEHttVt0A8UWvhus6pR4Xv9/yov7Y9raDziNAAAAAAOgAAAAAIAACAAAAAiJnA8xskWQhx6EdcQCp3VAnVrwRqStiQmMXdf1crZ9zAAAAAN8mGr5ll+pndC4zCEw5sY/xGjH7B0VTmRJESLvDrIykEFfMFl/+bt2SDuAW5Kn+NAAAAAyfGVhA4cq4D1x+H7wJfQwhWBcJaXkpheXoxE9AfUUruQY2YPfWmsLU/Bxu0jARVSguRFX0cVkA3vU3QWwTGr7w==</LastKnownProtectedHashedPassword>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

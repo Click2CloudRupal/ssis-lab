@@ -1,0 +1,24 @@
+{
+    "properties": {
+        "name": "##TriggerName##",
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "##frequency##",
+                "interval": ##interval##,
+                "startTime": "##startTime##",
+		"schedule": {  
+			"weekDays": ["##weekday##"]
+		}
+            }
+        },
+        "pipelines": [{
+                "pipelineReference": {
+                    "type": "PipelineReference",
+                    "referenceName": "##pipelinename##"
+                }
+            }
+        ],
+        "runtimeState": "##runtimeState##"
+    }
+}

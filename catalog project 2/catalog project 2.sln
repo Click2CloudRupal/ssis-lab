@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "catalog project 2", "catalog project 2\catalog project 2.dtproj", "{25AC1875-EA1D-451C-B1EA-80DBD117991C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25AC1875-EA1D-451C-B1EA-80DBD117991C}.Development|Default.ActiveCfg = Development
+		{25AC1875-EA1D-451C-B1EA-80DBD117991C}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1336C490-EF32-40B8-932A-079ED6B74CCE}
+	EndGlobalSection
+EndGlobal

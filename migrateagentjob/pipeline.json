@@ -1,0 +1,37 @@
+{
+    "name": "##PipelineName##",
+    "properties": {
+        "activities": [{
+            "name": "##ActivityName##",
+            "description": "My SSIS package/activity description",
+            "type": "ExecuteSSISPackage",
+            "typeProperties": {
+              "connectVia": {
+                "referenceName": "##AzureSSISName##",
+                "type": "IntegrationRuntimeReference"
+              },
+                "runtime": "x64",
+                "loggingLevel": "Basic",
+                "packageLocation": {
+                    "packagePath": "##PackagePath##"
+                },
+                "packageParameters": {
+                    "serverName": {
+                        "value": "##AzureDBName##"
+                    },
+                    "password": {
+                        "value": {
+                            "type": "SecureString",
+                            "value": "##AzureDBPassword##"
+                        }
+                    }
+                }
+            },
+            "policy": {
+                "timeout": "0.01:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30
+            }
+        }]
+    }
+}

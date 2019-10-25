@@ -1,0 +1,37 @@
+{
+    "name": "ssisjob2",
+    "properties": {
+        "activities": [{
+            "name": "consplit",
+            "description": "My SSIS package/activity description",
+            "type": "ExecuteSSISPackage",
+            "typeProperties": {
+              "connectVia": {
+                "referenceName": "SPAzureSsisIR",
+                "type": "IntegrationRuntimeReference"
+              },
+                "runtime": "x64",
+                "loggingLevel": "Basic",
+                "packageLocation": {
+                    "packagePath": "folder2/catalog project 2/consplit.dtsx"
+                },
+                "packageParameters": {
+                    "serverName": {
+                        "value": "labserverzqboa73y2zauw.database.windows.net"
+                    },
+                    "password": {
+                        "value": {
+                            "type": "SecureString",
+                            "value": "pa$$w0rd"
+                        }
+                    }
+                }
+            },
+            "policy": {
+                "timeout": "0.01:00:00",
+                "retry": 0,
+                "retryIntervalInSeconds": 30
+            }
+        }]
+    }
+}

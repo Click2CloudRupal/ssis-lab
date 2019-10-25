@@ -1,0 +1,155 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "serverName": {
+      "type": "string",
+      "defaultValue": "[concat('labserver', uniqueString(resourceGroup().id, deployment().name))]",
+      "metadata": {
+        "description": "Name for the SQL server"
+      }
+    },
+    "adminUser": {
+      "type": "string",
+      "defaultValue": "LabUser",
+      "metadata": {
+        "description": "Username for admin"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "defaultValue": "Pa$$w0rd",
+      "metadata": {
+        "description": "Password for admin"
+      }
+    },
+    "dataFactoryName": {
+      "type": "string",
+      "defaultValue": "[concat('labadf', uniqueString(resourceGroup().id, deployment().name))]",
+      "metadata": {
+        "description": "Name of the data factory. Must be globally unique."
+      }
+    },
+    "azureSsisIrName": {
+      "type": "string",
+      "defaultValue": "[concat('ir-', uniqueString(resourceGroup().id, deployment().name))]",
+      "metadata": {
+        "description": "Name of the Azure SSIS integration runtime"
+      }
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "[concat('labstorage', uniqueString(resourceGroup().id))]",
+      "metadata": {
+          "description": "Specifies the name of the Azure Storage account."
+        }
+      } 
+  },
+  "variables": {
+    "databaseServerName": "[parameters('serverName')]",
+    "databaseServerLocation": "[resourceGroup().location]",
+    "databaseServerAdminLogin": "[parameters('adminUser')]",
+    "databaseServerAdminLoginPassword": "[parameters('adminPassword')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Sql/servers",
+      "name": "[variables('databaseServerName')]",
+      "location": "[variables('databaseServerLocation')]",
+      "apiVersion": "2015-05-01-preview",
+      "properties": {
+        "administratorLogin": "[variables('databaseServerAdminLogin')]",
+        "administratorLoginPassword": "[variables('databaseServerAdminLoginPassword')]",
+        "version": "12.0"
+      },
+      "tags": {
+        "DisplayName": "[variables('databaseServerName')]"
+      },
+      "resources": [
+        {
+            "type": "firewallrules",
+            "name": "AllowAllAzureIps",
+            "location": "[variables('databaseServerLocation')]",
+            "apiVersion": "2015-05-01-preview",
+            "dependsOn": [
+                "[variables('databaseServerName')]"
+            ],
+            "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "0.0.0.0"
+            }
+        }
+      ]
+    },
+    {
+      "name": "[parameters('dataFactoryName')]",
+      "type": "Microsoft.DataFactory/factories",
+      "apiVersion": "2018-06-01",
+      "location": "[variables('databaseServerLocation')]",
+      "properties": {},
+      "resources": [
+        {
+          "name": "[concat(parameters('dataFactoryName'), '/SPAzureSsisIR')]",
+          "type": "Microsoft.DataFactory/factories/integrationRuntimes",
+          "dependsOn": [
+            "[parameters('dataFactoryName')]",
+            "[concat('Microsoft.Sql/servers/', variables('databaseServerName'))]"
+          ],
+          "apiVersion": "2018-06-01",
+          "properties": {
+            "type": "Managed",
+            "typeProperties": {
+              "computeProperties": {
+                "location": "[variables('databaseServerLocation')]",
+                "nodeSize": "Standard_D2_v3",
+                "numberOfNodes": "1",
+                "maxParallelExecutionsPerNode": "1"
+              },
+              "ssisProperties": {
+                "catalogInfo": {
+                  "catalogServerEndpoint": "[concat(variables('databaseServerName'),'.database.windows.net')]",
+                  "catalogAdminUserName": "[variables('databaseServerAdminLogin')]",
+                  "catalogAdminPassword": {
+                    "type": "SecureString",
+                    "value": "[variables('databaseServerAdminLoginPassword')]"
+                  },
+                  "catalogPricingTier": "S1"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2018-07-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[variables('databaseServerLocation')]",
+      "kind": "StorageV2",
+      "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+      },
+      "properties": {
+          "accessTier": "Hot"
+        }
+      },
+      {
+      "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+      "apiVersion": "2019-04-01",
+      "name": "[concat(parameters('storageAccountName'), '/default/ssispackages')]",
+      "dependsOn": [
+          "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+        ]
+      },
+      {
+        "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "apiVersion": "2019-04-01",
+        "name": "[concat(parameters('storageAccountName'), '/default/ssislogging')]",
+        "dependsOn": [
+            "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
+          ]
+        }
+  ]
+}
