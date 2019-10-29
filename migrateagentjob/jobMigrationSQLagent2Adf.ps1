@@ -2,7 +2,7 @@ $ServerName = '.'
 $JobPattern = "ssisjob"
 $AzureDBName = 'labserverzqboa73y2zauw.database.windows.net'
 $AzureDBPassword = 'Pa$$w0rd'
-$SubscriptionName = "yoursubscriptionname"
+$SubscriptionId = "yoursubscriptionId"
 $ResourceGroupName = "adf-ssis-lab"
 $DataFactoryName = "labadfzqboa73y2zauw"
 $AzureSSISName = "SPAzureSsisIR"
@@ -12,7 +12,7 @@ $TriggerTemplate = "C:\labfiles\migrateagentjob\trigger.json"
 $TriggerPath = "C:\labfiles\migrateagentjob\myTrigger.json"
 $runtimeState = "Started"
 
-Connect-AzAccount -SubscriptionName $SubscriptionName
+Connect-AzAccount -SubscriptionId $SubscriptionId
 
 [System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SqlServer.Smo') | Out-Null
 $server = New-Object "Microsoft.SqlServer.Management.Smo.Server" $ServerName

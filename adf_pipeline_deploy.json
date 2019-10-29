@@ -1,0 +1,107 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory Name",
+            "defaultValue": "labadfzqboa73y2zauw"
+        },
+        "integrationRuntime_SPAzureSsisIR": {
+            "type": "string",
+            "metadata": "Integration Runtime Name",
+            "defaultValue": "SPAzureSsisIR"
+        },
+        "database_serverName": {
+            "type": "string",
+            "defaultValue": "labserverzqboa73y2zauw.database.windows.net"
+        },
+        "database_userName": {
+            "type": "string",
+            "defaultValue": "labUser"
+        },
+        "database_password": {
+            "type": "secureString",
+            "defaultValue": "Pa$$w0rd"
+        },
+        "storage_accountName": {
+            "type": "string",
+            "defaultValue": "labstorage4cpiegiqclsdy"
+        },
+        "storage_key": {
+            "type": "secureString",
+            "defaultValue": "sezlmICKuUwet9tC0jIqSqyNsMDuVqNE7832kCKWHz5LSWP+08PlrEKBj1qq8geXRBiCbhC9gublRP5p0W2sJQ=="
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/ssis-file-package')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "file-package",
+                        "type": "ExecuteSSISPackage",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "7.00:00:00",
+                            "retry": 0,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "packageLocation": {
+                                "packagePath": "[concat('\\\\',parameters('storage_accountName'), '.file.core.windows.net\\ssispackages\\billingagg.dtsx')]",
+                                "type": "File",
+                                "typeProperties": {
+                                    "accessCredential": {
+                                        "domain": "Azure",
+                                        "userName": "[parameters('storage_accountName')]",
+                                        "password": {
+                                            "type": "SecureString",
+                                            "value": "[parameters('storage_key')]"
+                                        }
+                                    }
+                                }
+                            },
+                            "connectVia": {
+                                "referenceName": "SPAzureSsisIR",
+                                "type": "IntegrationRuntimeReference"
+                            },
+                            "loggingLevel": "Basic",
+                            "projectConnectionManagers": {},
+                            "packageConnectionManagers": {
+                                "demodatabase": {
+                                    "ConnectionString": {
+                                        "value": "[concat('Data Source=', parameters('database_serverName'),'; User ID=', parameters('database_userName'), '; Password=', parameters('database_password'), '; Initial Catalog=demodatabase;')]"
+                                    }
+                                }
+                            },
+                            "logLocation": {
+                                "logPath": "[concat('\\\\',parameters('storage_accountName'), '.file.core.windows.net\\ssislogging')]",
+                                "type": "File",
+                                "typeProperties": {
+                                    "accessCredential": {
+                                        "domain": "Azure",
+                                        "userName": "[parameters('storage_accountName')]",
+                                        "password": {
+                                            "type": "SecureString",
+                                            "value": "[parameters('storage_key')]"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "annotations": []
+            }
+        }
+    ]
+}
