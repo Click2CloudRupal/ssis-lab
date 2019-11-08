@@ -1,14 +1,19 @@
+#Add storage access credential. Replace with your storage account and access key
 cmdkey /add:labstorage4cpiegiqclsdy.file.core.windows.net /user:azure\labstorage4cpiegiqclsdy /pass:8lfibZxDZtiaB2BsYYVElZbSiKVP8FbpL317iJid6Dr2vmZIfFUD0YFDguJkPSeAz3BUzixaHxUKbMIIB+q2Ag==
 
 cmdkey /list:labstorage4cpiegiqclsdy.file.core.windows.net
 
+#Move package from local to Azure File Share.  Replace with your storage account
 dtutil /File c:\labfiles\file-system-packages\billingagg.dtsx /COPY File;\\labstorage4cpiegiqclsdy.file.core.windows.net\ssispackages\billingagg.dtsx
 
+#Azure-enabled DTexec location
 cd C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\CommonExtensions\Microsoft\SSIS\150\Binn
 
+#Run Azure-enabled DTexec. Replace with your storage account. This run will fail as this package uses Windows Authentication which is not supported in SSIS IR.  
 .\AzureDTExec.exe ^
 /F \\labstorage4cpiegiqclsdy.file.core.windows.net\ssispackages\billingagg.dtsx 
 
+#Run Azure-enabled DTexec. Replace with your storage account and Data Source with your Azure SQL Database
 .\AzureDTExec.exe ^
 /F \\labstorage4cpiegiqclsdy.file.core.windows.net\ssispackages\billingagg.dtsx ^
 /Conn "demodatabase; Data Source=labserverzqboa73y2zauw.database.windows.net; User ID=LabUser; Password=Pa$$w0rd; Initial Catalog=demodatabase;" 
