@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:DelayValidation="True"
+  DTS:ObjectName="demodatabase"
+  DTS:DTSID="{DB4FED2B-FA4E-4FB1-B0EB-BB474F218FD0}"
+  DTS:CreationName="OLEDB">
+  <DTS:PropertyExpression
+    DTS:Name="InitialCatalog">@[$Project::dbName]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="Password">@[$Project::destPwd]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="ServerName">@[$Project::destServerName]</DTS:PropertyExpression>
+  <DTS:PropertyExpression
+    DTS:Name="UserName">@[$Project::destUser]</DTS:PropertyExpression>
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=.;User ID=LabUser;Initial Catalog=demodatabase;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAsZKIKCnQPkeTueSwpd+buwAAAAACAAAAAAAQZgAAAAEAACAAAABRRUZnePcSn53mS6cZ+5HkKKXNDDmgkuKrnHzngPIgnAAAAAAOgAAAAAIAACAAAAAqDhVTuI8xVL2i0yyH5sM1NEZSm4zi6eUzFoC+Zw0MM4AAAACCXwA7vPhzKqMpoEP/2aQ7W+ZrT52lHc8MRTDeiQ8VO/qZAW9D2B2eSLt3f8RyFDdyxdIyTN6BgCSoBg9eudbGrjBNldXAxQs6yXA4RWgpeLa9fFvEymTBTkD8Er6bnGb4DMgsV+9fOoj633+OuGvjjEPRipo7oQxO+onb7qAeFUAAAABbDFG2Te2NkwS8G8hBlm6ttYaTL/os1LjriZsXFQAItQv5L2xMc70/dvN4LQDRMsofWV/l807K8Kl5pqim2bvX</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

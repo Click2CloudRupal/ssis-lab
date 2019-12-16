@@ -1,0 +1,918 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/12/2019 4:47:26 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="CN-CHUGU-618"
+  DTS:CreatorName="FAREAST\chugu"
+  DTS:DTSID="{68220A3B-4E05-40DD-A013-1F98582AC3D6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="odbc"
+  DTS:PackageType="5"
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{41C955F6-B0DD-46BA-91F7-8B14A70A6CED}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[odbccm]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{562F526A-1A9C-4E15-8790-75BF45C847D3}"
+      DTS:ObjectName="odbccm">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[$Project::dbName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=.;uid=LabUser;Initial Catalog=demodatabase;Driver={ODBC Driver 17 for SQL Server};database=demodatabase;">
+          <DTS:Password
+            DTS:Name="pwd"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAsZKIKCnQPkeTueSwpd+buwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABfnTpGNOZS7bHba3C0b8gt1ihCRq9unm1yhY5zYbw6HAAAAAAOgAAAAAIAACAAAABa8R9WTfYw6mRhz7k2Mikbo57mfKtL/x9V5CI3ws+oKyAAAAAkDXHCekSnwGlQfDwvVSQlWUuqAOTGb9jhVa/BXEivmkAAAADrSPb+ZMIxrRcaEjQoQF7jXl86C/v9ckKm0MzgLC0FO0EucyO2qtftycMrKoV421b6K7A6X4Oz0D+RQvPcp7jR</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\transfer data from odbc source"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{78DBD77E-6A78-400C-ABF3-E52DA3555BD6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="transfer data from odbc source">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\transfer data from odbc source\ODBC Source"
+              componentClassID="Attunity.SSISODBCSrc"
+              description="ODBC Source"
+              name="ODBC Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  name="TableName">"dbo"."HighIncomeCustomers"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\transfer data from odbc source\ODBC Source.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[odbccm]"
+                  connectionManagerRefId="Package.ConnectionManagers[odbccm]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[MiddleInitial]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[MiddleInitial]"
+                      length="1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[MiddleInitial]"
+                      name="MiddleInitial" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[BirthDate]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[MaritalStatus]"
+                      length="1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[MaritalStatus]"
+                      name="MaritalStatus" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Gender]"
+                      length="1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[EmailAddress]"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[YearlyIncome]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[YearlyIncome]"
+                      name="YearlyIncome" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[TotalChildren]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TotalChildren]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[TotalChildren]"
+                      name="TotalChildren" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[NumberChildrenAtHome]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[NumberChildrenAtHome]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[NumberChildrenAtHome]"
+                      name="NumberChildrenAtHome" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Education]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Education]"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Education]"
+                      name="Education" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Occupation]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Occupation]"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Occupation]"
+                      name="Occupation" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[HouseOwnerFlag]"
+                      dataType="bool"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[HouseOwnerFlag]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[HouseOwnerFlag]"
+                      name="HouseOwnerFlag" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[NumberCarsOwned]"
+                      dataType="ui1"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[NumberCarsOwned]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[NumberCarsOwned]"
+                      name="NumberCarsOwned" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[AddressLine1]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[AddressLine1]"
+                      length="60"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[AddressLine1]"
+                      name="AddressLine1" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[AddressLine2]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[AddressLine2]"
+                      length="60"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[AddressLine2]"
+                      name="AddressLine2" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[City]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[City]"
+                      length="30"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[State]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[State]"
+                      length="3"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[ZIP]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ZIP]"
+                      length="10"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[ZIP]"
+                      name="ZIP" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Phone]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Phone]"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Phone]"
+                      name="Phone" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[MiddleInitial]"
+                      dataType="wstr"
+                      length="1"
+                      name="MiddleInitial" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[MaritalStatus]"
+                      dataType="wstr"
+                      length="1"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="50"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[YearlyIncome]"
+                      dataType="cy"
+                      name="YearlyIncome" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[TotalChildren]"
+                      dataType="ui1"
+                      name="TotalChildren" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[NumberChildrenAtHome]"
+                      dataType="ui1"
+                      name="NumberChildrenAtHome" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Education]"
+                      dataType="wstr"
+                      length="50"
+                      name="Education" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Occupation]"
+                      dataType="wstr"
+                      length="50"
+                      name="Occupation" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[HouseOwnerFlag]"
+                      dataType="bool"
+                      name="HouseOwnerFlag" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[NumberCarsOwned]"
+                      dataType="ui1"
+                      name="NumberCarsOwned" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[AddressLine1]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine1" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[AddressLine2]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine2" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="3"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[ZIP]"
+                      dataType="wstr"
+                      length="10"
+                      name="ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="50"
+                      name="Phone" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[MiddleInitial]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[MiddleInitial]"
+                      name="MiddleInitial" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[MaritalStatus]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[MaritalStatus]"
+                      name="MaritalStatus" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[EmailAddress]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[EmailAddress]"
+                      name="EmailAddress" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[YearlyIncome]"
+                      dataType="cy"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[YearlyIncome]"
+                      name="YearlyIncome" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[TotalChildren]"
+                      dataType="ui1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[TotalChildren]"
+                      name="TotalChildren" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[NumberChildrenAtHome]"
+                      dataType="ui1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[NumberChildrenAtHome]"
+                      name="NumberChildrenAtHome" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Education]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Education]"
+                      name="Education" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Occupation]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Occupation]"
+                      name="Occupation" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[HouseOwnerFlag]"
+                      dataType="bool"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[HouseOwnerFlag]"
+                      name="HouseOwnerFlag" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[NumberCarsOwned]"
+                      dataType="ui1"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[NumberCarsOwned]"
+                      name="NumberCarsOwned" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[AddressLine1]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[AddressLine1]"
+                      name="AddressLine1" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[AddressLine2]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[AddressLine2]"
+                      name="AddressLine2" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[ZIP]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[ZIP]"
+                      name="ZIP" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Phone]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[Phone]"
+                      name="Phone" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transfer data from odbc source\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[HighIncomeCustomers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\transfer data from odbc source\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{DB4FED2B-FA4E-4FB1-B0EB-BB474F218FD0}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[demodatabase]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MiddleInitial]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="MiddleInitial"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MiddleInitial]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[MiddleInitial]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MaritalStatus]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="MaritalStatus"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[MaritalStatus]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmailAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EmailAddress"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[EmailAddress]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[YearlyIncome]"
+                      cachedDataType="cy"
+                      cachedName="YearlyIncome"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YearlyIncome]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[YearlyIncome]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalChildren]"
+                      cachedDataType="ui1"
+                      cachedName="TotalChildren"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalChildren]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[TotalChildren]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NumberChildrenAtHome]"
+                      cachedDataType="ui1"
+                      cachedName="NumberChildrenAtHome"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NumberChildrenAtHome]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[NumberChildrenAtHome]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Education]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Education"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Education]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Education]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Occupation]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Occupation"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Occupation]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Occupation]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[HouseOwnerFlag]"
+                      cachedDataType="bool"
+                      cachedName="HouseOwnerFlag"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HouseOwnerFlag]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[HouseOwnerFlag]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NumberCarsOwned]"
+                      cachedDataType="ui1"
+                      cachedName="NumberCarsOwned"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NumberCarsOwned]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[NumberCarsOwned]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AddressLine1]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="AddressLine1"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine1]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[AddressLine1]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AddressLine2]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="AddressLine2"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine2]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[AddressLine2]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="3"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ZIP]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ZIP"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ZIP]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[ZIP]" />
+                    <inputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Phone"
+                      externalMetadataColumnId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      lineageId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output].Columns[Phone]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MiddleInitial]"
+                      dataType="wstr"
+                      length="1"
+                      name="MiddleInitial" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MaritalStatus]"
+                      dataType="wstr"
+                      length="1"
+                      name="MaritalStatus" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="1"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmailAddress]"
+                      dataType="wstr"
+                      length="50"
+                      name="EmailAddress" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[YearlyIncome]"
+                      dataType="cy"
+                      name="YearlyIncome" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalChildren]"
+                      dataType="ui1"
+                      name="TotalChildren" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NumberChildrenAtHome]"
+                      dataType="ui1"
+                      name="NumberChildrenAtHome" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Education]"
+                      dataType="wstr"
+                      length="50"
+                      name="Education" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Occupation]"
+                      dataType="wstr"
+                      length="50"
+                      name="Occupation" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HouseOwnerFlag]"
+                      dataType="bool"
+                      name="HouseOwnerFlag" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NumberCarsOwned]"
+                      dataType="ui1"
+                      name="NumberCarsOwned" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine1]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine1" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AddressLine2]"
+                      dataType="wstr"
+                      length="60"
+                      name="AddressLine2" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="30"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="3"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ZIP]"
+                      dataType="wstr"
+                      length="10"
+                      name="ZIP" />
+                    <externalMetadataColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="50"
+                      name="Phone" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transfer data from odbc source\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\transfer data from odbc source\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\transfer data from odbc source\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\transfer data from odbc source\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\transfer data from odbc source.Paths[ODBC Source Output]"
+              endId="Package\transfer data from odbc source\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\transfer data from odbc source\ODBC Source.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="224,42.6666666666667"
+          Id="Package\transfer data from odbc source"
+          TopLeft="5.5,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\transfer data from odbc source">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\transfer data from odbc source\OLE DB Destination"
+          TopLeft="79.5833321474492,167.403511922886" />
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\transfer data from odbc source\ODBC Source"
+          TopLeft="90.6666666666667,75.3333333333333" />
+        <EdgeLayout
+          Id="Package\transfer data from odbc source.Paths[ODBC Source Output]"
+          TopLeft="165.458332740391,118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.4035119228857"
+              Start="0,0"
+              End="0,41.9035119228857">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.9035119228857" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\transfer data from odbc source\ODBC Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\transfer data from odbc source\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
