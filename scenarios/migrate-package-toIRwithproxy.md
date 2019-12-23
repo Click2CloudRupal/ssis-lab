@@ -1,6 +1,6 @@
 # Tutorial: migrate packages to Azure-SSIS IR with self-hosted IR as proxy
 
-This is a step-by-step tutorial to migrate two sample pacakges to Azure-SSIS with [self-hosted IR as proxy](https://docs.microsoft.com/azure/data-factory/self-hosted-integration-runtime-proxy-ssis) without package re-design.  
+This is a step-by-step tutorial to migrate two sample pacakges to Azure-SSIS with [self-hosted IR as proxy](https://docs.microsoft.com/azure/data-factory/self-hosted-integration-runtime-proxy-ssis).
 
 Prepare a demo server :
 
@@ -75,9 +75,15 @@ Select flatfile.dtsx, then launch execute package. In **Advance** tab, add:
 
 ![ssms-execute](media/ssms-execute.png)
 
+> [!TIP]
+> If you rebuild the package with SSDT 15.9.1 or later then deploy, you will see "ConnectByProxy" as a property of connection manager, then you can change the property to "True" directly.
+> ![conf-proxy-prop](media/ssms-cm-file-newprop.png)
+
 ### Execute package via SQL job (SSISDB in Azure SQL managed instance)
 
-To be updated
+Advanced property override is not supported in SSIS job configuration yet, you can use T-SQL to execute SSIS job with property override.
+
+Or you can rebuild package with SSDT 15.9.1 or later then deploy and configure "ConnectByProxy" property in job conneciton manager configuration.
 
 ### Execute package via ADF pipeline (SSISDB in Azure SQL server)
 
@@ -94,3 +100,7 @@ To be updated
 **Value**: True
 
 ![ssis-property](media/pipeline-property.png)
+
+>[!TIP]
+> If you rebuild the package with SSDT 15.9.1 or later then deploy, you do not need to do property override. You can directly update property "ConnectByProxy" value to "True" of the connection manager.
+> ![pipeline-prop-new](media/pipeline-property-new.png)
