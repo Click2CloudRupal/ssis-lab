@@ -1,12 +1,12 @@
 # Tutorial: migrate packages to Azure-SSIS IR with self-hosted IR as proxy
 
-This is a step-by-step tutorial to migrate two sample pacakges to Azure-SSIS with [self-hosted IR as proxy](https://docs.microsoft.com/azure/data-factory/self-hosted-integration-runtime-proxy-ssis).
+This is a step-by-step tutorial to migrate two sample packages to Azure-SSIS with [self-hosted IR as proxy](https://docs.microsoft.com/azure/data-factory/self-hosted-integration-runtime-proxy-ssis).
 
-Prepare a demo server :
+Prepare a demo server:
 
 - SQL server with SSIS, as on-premises source.
-- download folder "shirdemo" to c:\.
-- create DB "demodatabase".
+- Download folder "shirdemo" under [this link](https://github.com/chugugrace/ssis-lab/tree/master/scenarios) to c:\.
+- Create DB empty "demodatabase".
 - The self-hosted IR is installed with default configuration:
     - Self-hosted IR service account: “NT Service\DIAHostService” by default
     - Self-hosted IR logging: “C:\ProgramData\SSISTelemetry” by default
