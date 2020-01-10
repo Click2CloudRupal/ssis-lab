@@ -1,8 +1,8 @@
 # SSIS lift-n-shift workshop
 
+SSIS lift-n-shift workshop includes below tasks:
 
-Tasks
-- Task 0: Run ARM template to provision ADF, SSIS IR and Azure SQL Database (if you bring your own subscription) 
+- Task 0: Run ARM template to provision ADF, SSIS IR and Azure SQL Database
 - Task 1: Connect and prepare data to Azure SQL Database
 - Task 2: Assessment packages via DMA before migration
 - Task 3: Design and execute package via SSDT Azure mode
@@ -12,8 +12,7 @@ Tasks
 - Task 7: Deploy File System packages via ARM template to ADF pipeline
 - Task 8: Migrate SSIS projects to SSIS IR in ADF
 - Task 9: Migrate SSIS jobs to ADF
-- Task 10: Clean up all Azure resources (if you use your own subscription)
+- Task 10: Clean up all Azure resources
 
-Refer to step-by-step.doc for detail instructions. 
+Refer to [step-by-step](https://github.com/chugugrace/ssis-lab/blob/master/ignite-lab-2019/step-by-step.docx) for detail instructions.
 
-Contact chunhua.gu@microsoft.com for any questions or comments. 
