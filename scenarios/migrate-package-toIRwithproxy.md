@@ -31,7 +31,7 @@ This project includes:
 This package is to transfer data from **flat file connection manager "NewCustomers"** (C:\shirdemo\NewCustomers.txt) to local SQL server **demodatabase**. Destination SQL server is moved to Azure SQL server, flat file source is kept in on-premises.
 
 > [!NOTE]
-> Make sure source folder is accessible by Self-hosted IR service account “NT Service\DIAHostService”
+> Make sure source folder is accessible by Self-hosted IR service account “NT Service\DIAHostService”. This is for demo purpose, check more info about [accessing data stores and file shares with Windows authentication from SSIS packages in Azure](https://docs.microsoft.com/sql/integration-services/lift-shift/ssis-azure-connect-with-windows-auth?view=sql-server-2017).
 
 - Package odbc.dtsx
 
